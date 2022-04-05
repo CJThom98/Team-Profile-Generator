@@ -145,6 +145,87 @@ const promptEmployee = managerData => {
                 managerData.engineers.push({...employeeData, ...role})
                 return promptEmployee(managerData)
             })
+        } else if (role === "Intern") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: 'What is the name of your Intern? (Required)',
+                    validate: internNameInput => {
+                        if (internNameInput) {
+                            return true;
+                        } else {
+                            console.log('Oh come on! The poor kid isn\'t even getting paid! The least you could do is learn their name. Please provide their name!');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: 'What is the ID of your Intern? (Required)',
+                    validate: internIdInput => {
+                        if (internIdInput) {
+                            return true;
+                        } else {
+                            console.log('I am beginning to worry about the organization of your team. Please provide their ID.');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: 'What is the email your Intern uses? (Required)',
+                    validate: internEmailInput => {
+                        if (internEmailInput) {
+                            return true;
+                        } else {
+                            console.log('Do you even communicate with your team? They have to at least have a school email. Please provide the Interns email!');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: 'What is school you Intern goes to? (Required)',
+                    validate: internSchoolInput => {
+                        if (internSchoolInput) {
+                            return true;
+                        } else {
+                            console.log('*Sigh* How do you not--you know, nevermind. Just ask them what their school is and come back to provide it.');
+                            return false;
+                        }
+                    }
+                },
+            ]).then(employeeData => {
+                employee = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school)
+                let role = {role: "Intern"}
+                managerData.interns.push({...employeeData, ...role})
+                return promptEmployee(managerData)
+            })
+        } else {
+            return managerData
         }
     })
-}
+};
+
+promptManager()
+.then(promptEmployee)
+.then(managerData => {
+    return generatePage(managerData);
+})
+.then(pageHTML => {
+    return writeFile(pageHTML);
+})
+.then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+})
+.then(copyFileResponse => {
+    console.log(copyFileResponse);
+})
+.catch(err => {
+    console.log(err);
+});
