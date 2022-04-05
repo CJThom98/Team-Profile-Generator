@@ -1,0 +1,38 @@
+nav {
+    background-color: rgb(188, 32, 61);
+    height: 80px;
+    margin-top: 0%;
+}
+
+.page-title {
+    color: white;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.card {
+    background-color: rgb(59, 167, 203);
+    border-radius: 2%;
+    box-shadow: lightslategray 2px 2px;
+    align-items: center;
+    margin-left: 2%;
+    margin-top: 5%;
+}
+
+.card-title {
+    padding-top: 10px;
+}
+
+.card-header {
+   text-align: center;
+   color: white;
+}
+
+.my-5{
+    display: inline-flex;
+    margin-left: 20%;
+}
+
+.list-group-item {
+    font-size: small;
+}
