@@ -67,3 +67,84 @@ const promptManager = () => {
             return {...managerData, ...role}
     })
 };
+
+const promptEmployee = managerData => {
+    if (!managerData.engineers) {
+        managerData.engineers = [];
+    }
+
+    if (!managerData.interns) {
+        managerData.interns = [];
+    }
+
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "Would you like to add an Engineer, Intern, or have you finished building your team?",
+            choices: ['Engineer', 'Intern', 'Finished']
+        }
+    ]).then(({ role }) => {
+        if (role === "Engineer") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: 'What is their name? (Required)',
+                    validate: engineerNameInput => {
+                        if (engineerNameInput) {
+                            return true;
+                        } else {
+                            console.log('Your Engineer is a person, you must provide their name!');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: 'What is your Engineer\'s employee ID? (Required)',
+                    validate: engineerIdInput => {
+                        if (engineerIdInput) {
+                            return true;
+                        } else {
+                            console.log('Oh come on, you have to know this. Provide the ID of your Engineer.');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: 'What is the email of your Engineer? (Required)',
+                    validate: engineerEmailInput => {
+                        if (engineerEmailInput) {
+                            return true;
+                        } else {
+                            console.log('Seriously? How do you not know their email? How have you all been communicating? Please give their email address.');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'input',
+                    name: 'github',
+                    message: 'What is their GitHub username? (Required)',
+                    validate: engineerGithubInput => {
+                        if (engineerGithubInput) {
+                            return true;
+                        } else {
+                            console.log('Their GitHub. You know, the site that holds all of their work? The site you judged on whether they are appropriate for the role? That is the username we need, please provide it.');
+                            return false;
+                        }
+                    }
+                }
+            ]).then(employeeData => {
+                employee = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
+                let role = {role: "Engineer"}
+                managerData.engineers.push({...employeeData, ...role})
+                return promptEmployee(managerData)
+            })
+        }
+    })
+}
