@@ -1,5 +1,9 @@
+body {
+    background-color: #c1cfda;
+}
+
 nav {
-    background-color: rgb(188, 32, 61);
+    background-color: #157a6e;
     height: 80px;
     margin-top: 0%;
 }
@@ -11,9 +15,9 @@ nav {
 }
 
 .card {
-    background-color: rgb(59, 167, 203);
+    background-color: #ffa69e;
     border-radius: 2%;
-    box-shadow: lightslategray 2px 2px;
+    box-shadow: #011627 2px 2px;
     align-items: center;
     margin-left: 2%;
     margin-top: 5%;
