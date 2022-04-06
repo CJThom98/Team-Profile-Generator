@@ -36,7 +36,7 @@ const promptManager = () => {
         },
         {
             type: 'input',
-            email: 'email',
+            name: 'email',
             message: 'What is the email of your Team Manager? (Required)',
             validate: managerEmailInput => {
                 if (managerEmailInput) {
