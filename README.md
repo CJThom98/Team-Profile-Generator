@@ -15,6 +15,11 @@ SO THAT I have quick access to their emails and GitHub profiles
 * Node
 * Inquirer
 
+## How to Use
+* Clone the repo
+* run "npm install" to install Node, Jest, and Inquirer
+* Invoke the program using index.js
+
 ## License
 
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
